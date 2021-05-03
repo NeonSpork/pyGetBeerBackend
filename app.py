@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from flask import Flask, url_for
+from flask_cors import CORS
 import time
 
 try:
@@ -11,11 +12,11 @@ except:
     print("GPIO, hx711, w1thermsensor are NOT imported.")
 
 app = Flask(__name__)
+CORS(app)
 
-# TODO add custom name - requires messing about with /etc/hosts and adding an alias
-# app.config['SERVER_NAME'] = 'getbeer:5000'
 beerPin = 37
 vodkaPin = 38
+
 try:
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BOARD)
@@ -50,26 +51,27 @@ except:
             return "n/a"
 
 
+
+
 @app.route('/api/temp', methods=['GET'])
 def getTemp():
     try:
         tempRead = sensor.get_temperature()
         temp = "{:.1f}".format(tempRead)
     except:
-        temp = "n/a"
-    return temp
+        temp = 999
+    return "{}".format(temp)
 
-
-@app.route('/api/pints', method=['GET'])
+@app.route('/api/pints', methods=['GET'])
 def getPints():
     try:
         grams = hx.get_grams(times=1)
         pints = int((grams - 4250)*0.002)  # dry weight of keg is ca. 4250g
         if pints < 0:
             pints = 0
-        return pints
     except:
-        return "n/a"
+        pints = 999
+    return "{}".format(pints)
 
 
 @app.route('/api/dispenseBeer')
@@ -109,5 +111,5 @@ def dispenseVodka(seconds=10):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
     GPIO.cleanup()
