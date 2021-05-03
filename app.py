@@ -75,16 +75,10 @@ def getPints():
 
 
 @app.route('/api/dispenseBeer', methods=['POST'])
-def dispenseBeer(seconds=10):
-    """
-    Opens beer valve
-    ----------------
-    seconds : int
-        Adjust to reach your desired volume to dispense.
-    """
-
+def dispenseBeer():
     try:
       GPIO.output(beerPin, GPIO.HIGH)
+      # Adjust sleep time to reach desired volume.
       time.sleep(10)
       GPIO.output(beerPin, GPIO.LOW)
       return 1
@@ -93,16 +87,10 @@ def dispenseBeer(seconds=10):
 
 
 @app.route('/api/dispenseVodka', methods=['POST'])
-def dispenseVodka(seconds=10):
-    """
-    Opens secret vodka valve
-    ----------------
-    seconds : int
-        Adjust to reach your desired volume to dispense.
-    """
-
+def dispenseVodka():
     try:
       GPIO.output(vodkaPin, GPIO.HIGH)
+      # Adjust sleep time to reach desired volume.
       time.sleep(2)
       GPIO.output(vodkaPin, GPIO.LOW)
       return 1
