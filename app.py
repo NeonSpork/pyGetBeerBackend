@@ -42,35 +42,28 @@ try:
 except:
     class hx():
         def get_grams(times=1):
-            return "n/a"
+            return "load init err"
 try:
     sensor = W1ThermSensor()
 except:
     class sensor():
         def get_temperature():
-            return "n/a"
+            return "temp init err"
 
 
 
 
 @app.route('/api/temp', methods=['GET'])
 def getTemp():
-    try:
-        tempRead = sensor.get_temperature()
-        temp = "{:.1f}".format(tempRead)
-    except:
-        temp = "n/a"
+    temp = sensor.get_temperature()
     return "{}".format(temp)
 
 @app.route('/api/pints', methods=['GET'])
 def getPints():
-    try:
-        grams = hx.get_grams(times=1)
-        pints = int((grams - 4250)*0.002)  # dry weight of keg is ca. 4250g
-        if pints < 0:
-            pints = 0
-    except:
-        pints = "n/a"
+    grams = hx.get_grams(times=1)
+    pints = int((grams - 4250)*0.002)  # dry weight of keg is ca. 4250g
+    if pints < 0:
+        pints = 0
     return "{}".format(pints)
 
 
