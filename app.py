@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from flask import Flask, url_for
 from flask_cors import CORS
+import jsonify
 import time
 
 try:
@@ -51,20 +52,21 @@ except:
             return "temp init err"
 
 
+@app.route('/api/sensors', methods=['GET'])
+def readSensors():
+    data = {
+      'temp': 'err',
+      'pints': 'err'
+    }
 
+    data['temp'] = sensor.get_temperature()
 
-@app.route('/api/temp', methods=['GET'])
-def getTemp():
-    temp = sensor.get_temperature()
-    return "{}".format(temp)
-
-@app.route('/api/pints', methods=['GET'])
-def getPints():
     grams = hx.get_grams(times=1)
-    pints = int((grams - 4250)*0.002)  # dry weight of keg is ca. 4250g
-    if pints < 0:
-        pints = 0
-    return "{}".format(pints)
+    pintConversion = int((grams - 4250)*0.002)  # dry weight of keg is ca. 4250g
+    if pintConversion < 0:
+        pintConversion = 0
+    data['pints'] = pintConversion
+    return jsonify(data)
 
 
 @app.route('/api/dispenseBeer', methods=['POST'])
