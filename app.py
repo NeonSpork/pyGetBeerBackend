@@ -70,7 +70,7 @@ def getPints():
         if pints < 0:
             pints = 0
     except:
-        pints = n/a
+        pints = "n/a"
     return "{}".format(pints)
 
 
