@@ -74,7 +74,7 @@ def getPints():
     return "{}".format(pints)
 
 
-@app.route('/api/dispenseBeer')
+@app.route('/api/dispenseBeer', methods=['POST'])
 def dispenseBeer(seconds=10):
     """
     Opens beer valve
@@ -92,7 +92,7 @@ def dispenseBeer(seconds=10):
       return 99
 
 
-@app.route('/api/dispenseVodka')
+@app.route('/api/dispenseVodka', methods=['POST'])
 def dispenseVodka(seconds=10):
     """
     Opens secret vodka valve
