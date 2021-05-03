@@ -59,7 +59,7 @@ def getTemp():
         tempRead = sensor.get_temperature()
         temp = "{:.1f}".format(tempRead)
     except:
-        temp = 999
+        temp = "n/a"
     return "{}".format(temp)
 
 @app.route('/api/pints', methods=['GET'])
@@ -70,7 +70,7 @@ def getPints():
         if pints < 0:
             pints = 0
     except:
-        pints = 999
+        pints = n/a
     return "{}".format(pints)
 
 
