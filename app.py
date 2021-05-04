@@ -18,7 +18,7 @@ vodkaPin = 38
 
 # GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
-# GPIO.setup(7, GPIO.IN)  # Temp sensor DS18B20
+GPIO.setup(7, GPIO.IN)  # Temp sensor DS18B20
 # GPIO.setup(3, GPIO.IN)  # HX711 load sensor DT
 # GPIO.setup(5, GPIO.IN)  # HX711 load sensor SDK
 GPIO.setup(beerPin, GPIO.OUT)  # Output pin to solenoid BEER valve
@@ -33,15 +33,15 @@ GPIO.setup(vodkaPin, GPIO.OUT)  # Output pin to solenoid VODKA valve
 #         def cleanup():
 #             print("Simulating GPIO.cleanup()")
 
-hx = HX711(dout=3, pd_sck=5)
-hx.set_offset(8234508)  # This gets calibrated to zero the sensor
-hx.set_scale(-20.9993)
+# hx = HX711(dout=3, pd_sck=5)
+# hx.set_offset(8234508)  # This gets calibrated to zero the sensor
+# hx.set_scale(-20.9993)
 # except:
 #     class hx():
 #         def get_grams(times=1):
 #             return "load init err"
 # try:
-# sensor = W1ThermSensor()
+sensor = W1ThermSensor()
 # except:
 #     class sensor():
 #         def get_temperature():
@@ -54,9 +54,9 @@ def readSensors():
       'temp': 'err',
       'grams': 'err'
     }
-    # sensorData['temp'] = sensor.get_temperature()
+    sensorData['temp'] = sensor.get_temperature()
     
-    sensorData['temp'] = 9999
+    # sensorData['temp'] = 9999
     
     # TODO MOVE THE EQUATION BELOW TO FRONTEND
     # pintConversion = int((grams - 4250)*0.002)  # dry weight of keg is ca. 4250g
