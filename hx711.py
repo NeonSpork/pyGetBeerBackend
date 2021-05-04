@@ -54,8 +54,9 @@ class HX711:
             # Power up the chip
             self.power_up()
             self.set_gain(gain)
-        except Exception() as e:
+        except Exception as e:
             print(e)
+            print("No HX711 detected. Check wiring")
 
     def set_gain(self, gain=128):
 
