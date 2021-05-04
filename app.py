@@ -26,7 +26,7 @@ GPIO.output(vodkaPin, GPIO.HIGH)  # Start off
 try:
     hx = HX711(dout=2, pd_sck=3)
     hx.set_offset(8234508)  # This gets calibrated to zero the sensor
-    hx.set_scale(-20.9993)
+    hx.set_reference_unit(-20.9993)
 except:
     print("Load sensor error")
 try:
