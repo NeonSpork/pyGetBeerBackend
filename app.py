@@ -69,10 +69,10 @@ def readSensors():
 @app.route('/api/dispenseBeer', methods=['POST'])
 def dispenseBeer():
     try:
-      GPIO.output(beerPin, GPIO.HIGH)
+      GPIO.output(beerPin, GPIO.LOW)
       # Adjust sleep time to reach desired volume.
       time.sleep(10)
-      GPIO.output(beerPin, GPIO.LOW)
+      GPIO.output(beerPin, GPIO.HIGH)
       return 1
     except:
       return 99
@@ -81,10 +81,10 @@ def dispenseBeer():
 @app.route('/api/dispenseVodka', methods=['POST'])
 def dispenseVodka():
     try:
-      GPIO.output(vodkaPin, GPIO.HIGH)
+      GPIO.output(vodkaPin, GPIO.LOW)
       # Adjust sleep time to reach desired volume.
       time.sleep(2)
-      GPIO.output(vodkaPin, GPIO.LOW)
+      GPIO.output(vodkaPin, GPIO.HIGH)
       return 1
     except:
       return 99
