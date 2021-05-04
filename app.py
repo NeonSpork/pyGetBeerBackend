@@ -3,51 +3,31 @@ from flask_cors import CORS
 import time
 
 import RPi.GPIO as GPIO
-# from hx711 import HX711
-# from w1thermsensor import W1ThermSensor
-# except:
-#     print("No compatible SBC detected!")
-#     print("GPIO, hx711, w1thermsensor are NOT imported.")
+from hx711 import HX711
+from w1thermsensor import W1ThermSensor
 
 app = Flask(__name__)
 CORS(app)
 
-beerPin = 37
-vodkaPin = 38
+beerPin = 25
+vodkaPin = 26
 
 
-# GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-# GPIO.setup(7, GPIO.IN)  # Temp sensor DS18B20
-# GPIO.setup(3, GPIO.IN)  # HX711 load sensor DT
-# GPIO.setup(5, GPIO.IN)  # HX711 load sensor SDK
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(4, GPIO.IN)  # Temp sensor DS18B20
+GPIO.setup(2, GPIO.IN)  # HX711 load sensor DT
+GPIO.setup(3, GPIO.IN)  # HX711 load sensor SDK
 GPIO.setup(beerPin, GPIO.OUT)  # Output pin to solenoid BEER valve
 GPIO.output(beerPin, GPIO.HIGH) # Start off
 GPIO.setup(vodkaPin, GPIO.OUT)  # Output pin to solenoid VODKA valve
 GPIO.output(vodkaPin, GPIO.HIGH) # Start off
-# except:
-#     class GPIO():
-#         def output(pin, status):
-#             print("Simulating gpio{}, status: {}".format(pin, status))
-#         HIGH = "GPIO.HIGH"
-#         LOW = "GPIO.LOW"
 
-#         def cleanup():
-#             print("Simulating GPIO.cleanup()")
 
-# hx = HX711(dout=3, pd_sck=5)
-# hx.set_offset(8234508)  # This gets calibrated to zero the sensor
-# hx.set_scale(-20.9993)
-# except:
-#     class hx():
-#         def get_grams(times=1):
-#             return "load init err"
-# try:
-# sensor = W1ThermSensor()
-# except:
-#     class sensor():
-#         def get_temperature():
-#             return "temp init err"
+hx = HX711(dout=2, pd_sck=3)
+hx.set_offset(8234508)  # This gets calibrated to zero the sensor
+hx.set_scale(-20.9993)
+sensor = W1ThermSensor()
 
 
 @app.route('/api/sensors', methods=['GET'])
@@ -56,7 +36,7 @@ def readSensors():
       'temp': 'err',
       'grams': 'err'
     }
-    # sensorData['temp'] = sensor.get_temperature()
+    sensorData['temp'] = sensor.get_temperature()
     
     # sensorData['temp'] = 9999
     
@@ -64,7 +44,7 @@ def readSensors():
     # pintConversion = int((grams - 4250)*0.002)  # dry weight of keg is ca. 4250g
     # if pintConversion < 0:
     #     pintConversion = 0
-    # sensorData['grams'] = hx.get_grams(times=1)
+    sensorData['grams'] = hx.get_grams(times=1)
     return jsonify(sensorData)
 
 
