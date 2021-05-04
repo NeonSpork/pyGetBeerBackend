@@ -54,7 +54,7 @@ def readSensors():
     try:
         sensorData['grams'] = hx.get_grams(times=1)
     except Exception() as e:
-            print(e)
+        print(e)
     return jsonify(sensorData)
 
 
