@@ -3,8 +3,8 @@ from flask_cors import CORS
 import time
 
 import RPi.GPIO as GPIO
-from hx711 import HX711
-from w1thermsensor import W1ThermSensor
+# from hx711 import HX711
+# from w1thermsensor import W1ThermSensor
 # except:
 #     print("No compatible SBC detected!")
 #     print("GPIO, hx711, w1thermsensor are NOT imported.")
@@ -41,7 +41,7 @@ GPIO.setup(vodkaPin, GPIO.OUT)  # Output pin to solenoid VODKA valve
 #         def get_grams(times=1):
 #             return "load init err"
 # try:
-sensor = W1ThermSensor()
+# sensor = W1ThermSensor()
 # except:
 #     class sensor():
 #         def get_temperature():
@@ -54,7 +54,7 @@ def readSensors():
       'temp': 'err',
       'grams': 'err'
     }
-    sensorData['temp'] = sensor.get_temperature()
+    # sensorData['temp'] = sensor.get_temperature()
     
     # sensorData['temp'] = 9999
     
@@ -62,7 +62,7 @@ def readSensors():
     # pintConversion = int((grams - 4250)*0.002)  # dry weight of keg is ca. 4250g
     # if pintConversion < 0:
     #     pintConversion = 0
-    sensorData['grams'] = hx.get_grams(times=1)
+    # sensorData['grams'] = hx.get_grams(times=1)
     return jsonify(sensorData)
 
 
