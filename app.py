@@ -2,13 +2,12 @@ from flask import Flask, url_for, jsonify
 from flask_cors import CORS
 import time
 
-try:
-    import RPi.GPIO as GPIO
-    from hx711 import HX711
-    from w1thermsensor import W1ThermSensor
-except:
-    print("No compatible SBC detected!")
-    print("GPIO, hx711, w1thermsensor are NOT imported.")
+import RPi.GPIO as GPIO
+from hx711 import HX711
+from w1thermsensor import W1ThermSensor
+# except:
+#     print("No compatible SBC detected!")
+#     print("GPIO, hx711, w1thermsensor are NOT imported.")
 
 app = Flask(__name__)
 CORS(app)
