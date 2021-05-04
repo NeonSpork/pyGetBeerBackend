@@ -16,11 +16,11 @@ beerPin = 37
 vodkaPin = 38
 
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
+# GPIO.setwarnings(False)
+# GPIO.setmode(GPIO.BOARD)
 # GPIO.setup(7, GPIO.IN)  # Temp sensor DS18B20
-GPIO.setup(3, GPIO.IN)  # HX711 load sensor DT
-GPIO.setup(5, GPIO.IN)  # HX711 load sensor SDK
+# GPIO.setup(3, GPIO.IN)  # HX711 load sensor DT
+# GPIO.setup(5, GPIO.IN)  # HX711 load sensor SDK
 GPIO.setup(beerPin, GPIO.OUT)  # Output pin to solenoid BEER valve
 GPIO.setup(vodkaPin, GPIO.OUT)  # Output pin to solenoid VODKA valve
 # except:
