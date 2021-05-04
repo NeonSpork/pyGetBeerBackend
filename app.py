@@ -66,7 +66,7 @@ def readSensors():
     return jsonify(sensorData)
 
 
-@app.route('/api/dispenseBeer', methods=['POST'])
+@app.route('/api/dispenseBeer', methods=['GET'])
 def dispenseBeer():
     try:
       GPIO.output(beerPin, GPIO.LOW)
@@ -78,7 +78,7 @@ def dispenseBeer():
       return 99
 
 
-@app.route('/api/dispenseVodka', methods=['POST'])
+@app.route('/api/dispenseVodka', methods=['GET'])
 def dispenseVodka():
     try:
       GPIO.output(vodkaPin, GPIO.LOW)
