@@ -16,45 +16,45 @@ vodkaPin = 26
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 # GPIO.setup(4, GPIO.IN)  # Temp sensor DS18B20
-GPIO.setup(2, GPIO.IN)  # HX711 load sensor DT
-GPIO.setup(3, GPIO.OUT)  # HX711 load sensor SDK
+# GPIO.setup(2, GPIO.IN)  # HX711 load sensor DT
+# GPIO.setup(3, GPIO.OUT)  # HX711 load sensor SDK
 GPIO.setup(beerPin, GPIO.OUT)  # Output pin to solenoid BEER valve
 GPIO.output(beerPin, GPIO.HIGH)  # Start off
 GPIO.setup(vodkaPin, GPIO.OUT)  # Output pin to solenoid VODKA valve
 GPIO.output(vodkaPin, GPIO.HIGH)  # Start off
 
 try:
-    hx = HX711(2, 3)
-    hx.set_offset(8234508)  # This gets calibrated to zero the sensor
-    hx.set_reference_unit(-20.9993)
-except:
-    print("Load sensor error")
-try:
-    sensor = W1ThermSensor()
-except:
-    print("Temp sensor error")
+#     hx = HX711(2, 3)
+#     hx.set_offset(8234508)  # This gets calibrated to zero the sensor
+#     hx.set_reference_unit(-20.9993)
+# except:
+#     print("Load sensor error")
+# try:
+#     sensor = W1ThermSensor()
+# except:
+#     print("Temp sensor error")
 
 
 @app.route('/api/sensors', methods=['GET'])
 def readSensors():
     sensorData = {
-        'temp': 'err',
-        'grams': 'err'
+        'temp': 'n/a',
+        'grams': 'n/a'
     }
-    try:
-        sensorData['temp'] = sensor.get_temperature()
-    except Exception as e:
-        sensorData['temp'] = e
-        # sensorData['temp'] = 9999
+    # try:
+    #     sensorData['temp'] = sensor.get_temperature()
+    # except Exception as e:
+    #     sensorData['temp'] = e
+    #     # sensorData['temp'] = 9999
 
         # TODO MOVE THE EQUATION BELOW TO FRONTEND
         # pintConversion = int((grams - 4250)*0.002)  # dry weight of keg is ca. 4250g
         # if pintConversion < 0:
         #     pintConversion = 0
-    try:
-        sensorData['grams'] = hx.get_weight()
-    except Exception as e:
-        print(e)
+    # try:
+    #     sensorData['grams'] = hx.get_weight()
+    # except Exception as e:
+    #     print(e)
     return jsonify(sensorData)
 
 
