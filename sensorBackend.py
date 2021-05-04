@@ -39,8 +39,8 @@ GPIO.output(vodkaPin, GPIO.HIGH)  # Start off
 @app.route('/api/sensors', methods=['GET'])
 def readSensors():
     sensorData = {
-        'temp': 'n/a',
-        'grams': 'n/a'
+        'temp': 'temp err',
+        'grams': 'weight err'
     }
     # try:
     #     sensorData['temp'] = sensor.get_temperature()
