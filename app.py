@@ -84,5 +84,5 @@ def dispenseVodka():
 
 if __name__ == '__main__':
     app.config['SERVER_NAME'] = 'sensorapi:5000'
-    app.run()
+    app.run(host='0.0.0.0')
     GPIO.cleanup()
