@@ -23,7 +23,7 @@ GPIO.output(beerPin, GPIO.HIGH)  # Start off
 GPIO.setup(vodkaPin, GPIO.OUT)  # Output pin to solenoid VODKA valve
 GPIO.output(vodkaPin, GPIO.HIGH)  # Start off
 
-try:
+# try:
 #     hx = HX711(2, 3)
 #     hx.set_offset(8234508)  # This gets calibrated to zero the sensor
 #     hx.set_reference_unit(-20.9993)
