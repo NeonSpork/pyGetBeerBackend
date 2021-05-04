@@ -27,12 +27,12 @@ try:
     hx = HX711(dout=2, pd_sck=3)
     hx.set_offset(8234508)  # This gets calibrated to zero the sensor
     hx.set_scale(-20.9993)
-except Exception as e:
-    print(e)
+except:
+    print("Load sensor error")
 try:
     sensor = W1ThermSensor()
-except Exception as e:
-    print(e)
+except:
+    print("Temp sensor error")
 
 
 @app.route('/api/sensors', methods=['GET'])
