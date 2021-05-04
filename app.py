@@ -16,38 +16,37 @@ CORS(app)
 beerPin = 37
 vodkaPin = 38
 
-try:
-    GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(7, GPIO.IN)  # Temp sensor DS18B20
-    GPIO.setup(3, GPIO.IN)  # HX711 load sensor DT
-    GPIO.setup(5, GPIO.IN)  # HX711 load sensor SDK
-    GPIO.setup(beerPin, GPIO.OUT)  # Output pin to solenoid BEER valve
-    GPIO.setup(vodkaPin, GPIO.OUT)  # Output pin to solenoid VODKA valve
-except:
-    class GPIO():
-        def output(pin, status):
-            print("Simulating gpio{}, status: {}".format(pin, status))
-        HIGH = "GPIO.HIGH"
-        LOW = "GPIO.LOW"
 
-        def cleanup():
-            print("Simulating GPIO.cleanup()")
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(7, GPIO.IN)  # Temp sensor DS18B20
+GPIO.setup(3, GPIO.IN)  # HX711 load sensor DT
+GPIO.setup(5, GPIO.IN)  # HX711 load sensor SDK
+GPIO.setup(beerPin, GPIO.OUT)  # Output pin to solenoid BEER valve
+GPIO.setup(vodkaPin, GPIO.OUT)  # Output pin to solenoid VODKA valve
+# except:
+#     class GPIO():
+#         def output(pin, status):
+#             print("Simulating gpio{}, status: {}".format(pin, status))
+#         HIGH = "GPIO.HIGH"
+#         LOW = "GPIO.LOW"
 
-try:
-    hx = HX711(dout=3, pd_sck=5)
-    hx.set_offset(8234508)  # This gets calibrated to zero the sensor
-    hx.set_scale(-20.9993)
-except:
-    class hx():
-        def get_grams(times=1):
-            return "load init err"
-try:
-    sensor = W1ThermSensor()
-except:
-    class sensor():
-        def get_temperature():
-            return "temp init err"
+#         def cleanup():
+#             print("Simulating GPIO.cleanup()")
+
+hx = HX711(dout=3, pd_sck=5)
+hx.set_offset(8234508)  # This gets calibrated to zero the sensor
+hx.set_scale(-20.9993)
+# except:
+#     class hx():
+#         def get_grams(times=1):
+#             return "load init err"
+# try:
+sensor = W1ThermSensor()
+# except:
+#     class sensor():
+#         def get_temperature():
+#             return "temp init err"
 
 
 @app.route('/api/sensors', methods=['GET'])
