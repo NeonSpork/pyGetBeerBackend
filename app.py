@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 from flask import Flask, url_for, jsonify
 from flask_cors import CORS
 import time
