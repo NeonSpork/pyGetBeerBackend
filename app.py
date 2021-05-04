@@ -73,7 +73,7 @@ def dispenseBeer():
       # Adjust sleep time to reach desired volume.
       time.sleep(10)
       GPIO.output(beerPin, GPIO.HIGH)
-      return 1
+      return "nothing"
     except:
       return 99
 
@@ -85,7 +85,7 @@ def dispenseVodka():
       # Adjust sleep time to reach desired volume.
       time.sleep(2)
       GPIO.output(vodkaPin, GPIO.HIGH)
-      return 1
+      return "nothing"
     except:
       return 99
 
