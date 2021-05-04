@@ -43,8 +43,8 @@ def readSensors():
     }
     try:
         sensorData['temp'] = sensor.get_temperature()
-    except:
-        print("no tempsens")
+    except RuntimeError() as e:
+        sensorData['temp'] = e
         # sensorData['temp'] = 9999
 
         # TODO MOVE THE EQUATION BELOW TO FRONTEND
