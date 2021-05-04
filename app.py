@@ -27,11 +27,11 @@ try:
     hx = HX711(dout=2, pd_sck=3)
     hx.set_offset(8234508)  # This gets calibrated to zero the sensor
     hx.set_scale(-20.9993)
-except Exception() as e:
+except Exception as e:
     print(e)
 try:
     sensor = W1ThermSensor()
-except Exception() as e:
+except Exception as e:
     print(e)
 
 
@@ -43,7 +43,7 @@ def readSensors():
     }
     try:
         sensorData['temp'] = sensor.get_temperature()
-    except Exception() as e:
+    except Exception as e:
         sensorData['temp'] = e
         # sensorData['temp'] = 9999
 
@@ -53,7 +53,7 @@ def readSensors():
         #     pintConversion = 0
     try:
         sensorData['grams'] = hx.get_grams(times=1)
-    except Exception() as e:
+    except Exception as e:
         print(e)
     return jsonify(sensorData)
 
