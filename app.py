@@ -52,7 +52,7 @@ def readSensors():
         # if pintConversion < 0:
         #     pintConversion = 0
     try:
-        sensorData['grams'] = hx.get_grams(times=1)
+        sensorData['grams'] = hx.get_weight()
     except Exception as e:
         print(e)
     return jsonify(sensorData)
