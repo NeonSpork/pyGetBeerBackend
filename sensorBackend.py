@@ -9,15 +9,15 @@ from w1thermsensor import W1ThermSensor
 app = Flask(__name__)
 CORS(app)
 
-beerPin = 25
-vodkaPin = 26
+beerPin = 37
+vodkaPin = 38
 
 
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-# GPIO.setup(4, GPIO.IN)  # Temp sensor DS18B20
-# GPIO.setup(2, GPIO.IN)  # HX711 load sensor DT
-# GPIO.setup(3, GPIO.OUT)  # HX711 load sensor SDK
+GPIO.setmode(GPIO.BOARD)
+# GPIO.setup(7, GPIO.IN)  # Temp sensor DS18B20
+# GPIO.setup(3, GPIO.IN)  # HX711 load sensor DT
+# GPIO.setup(5, GPIO.OUT)  # HX711 load sensor SDK
 GPIO.setup(beerPin, GPIO.OUT)  # Output pin to solenoid BEER valve
 GPIO.output(beerPin, GPIO.HIGH)  # Start off
 GPIO.setup(vodkaPin, GPIO.OUT)  # Output pin to solenoid VODKA valve
