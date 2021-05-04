@@ -10,7 +10,7 @@ app = Flask(__name__)
 CORS(app)
 
 beerPin = 37
-vodkaPin = 38
+vodkaPin = 35
 
 
 GPIO.setwarnings(False)
