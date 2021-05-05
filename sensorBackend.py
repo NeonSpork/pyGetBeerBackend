@@ -16,22 +16,22 @@ vodkaPin = 29
 
 # GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(7, GPIO.IN)  # Temp sensor DS18B20
-GPIO.setup(3, GPIO.IN)  # HX711 load sensor DT
-GPIO.setup(5, GPIO.OUT)  # HX711 load sensor SDK
+# GPIO.setup(7, GPIO.IN)  # Temp sensor DS18B20
+# GPIO.setup(3, GPIO.IN)  # HX711 load sensor DT
+# GPIO.setup(5, GPIO.OUT)  # HX711 load sensor SDK
 GPIO.setup(beerPin, GPIO.OUT, initial=GPIO.LOW)  # Output pin to solenoid BEER valve
 GPIO.setup(vodkaPin, GPIO.OUT, initial=GPIO.LOW)  # Output pin to solenoid VODKA valve
 
-try:
-    hx = HX711(3, 5)
-    hx.set_offset(8234508)  # This gets calibrated to zero the sensor
-    hx.set_reference_unit(-20.9993)
-except:
-    print("Load sensor error")
-try:
-    sensor = W1ThermSensor()
-except:
-    print("Temp sensor error")
+# try:
+#     hx = HX711(3, 5)
+#     hx.set_offset(8234508)  # This gets calibrated to zero the sensor
+#     hx.set_reference_unit(-20.9993)
+# except:
+#     print("Load sensor error")
+# try:
+#     sensor = W1ThermSensor()
+# except:
+#     print("Temp sensor error")
 
 
 @app.route('/api/sensors', methods=['GET'])
